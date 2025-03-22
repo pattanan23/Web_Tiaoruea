@@ -1,0 +1,120 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: #0047AB;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo img{
+    width: 100px;
+    margin-right: 10px;
+}
+
+nav ul{
+    display: flex;
+    list-style: none;/*ลบเครื่องหมายขีด*/
+    gap: 15px; /*ช่องว่างระหว่าง li*/
+}
+
+nav ul li a{
+    text-decoration: none;/*ลบขีดใต้*/
+    font-size: 16px;
+    color: #0047AB
+}
+
+.login-btn{
+    background-color: #0047AB;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.promote{
+    background-color: #0047AB;
+    background-size: cover;
+    text-align: center;
+    padding: 5px 0;
+    color: white;
+    font-size: 30px;
+}
+
+.im-promotion {
+    display: grid;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.im-promotion img{
+    width: 500px;
+   
+}
+
+.social img{
+    width: 50px;
+    height: 50px;
+    gap: 10px;
+    margin-top: 20px;
+}
+footer{
+    display: flex;
+    justify-content: space-between;
+    background-color:#0047AB;
+    color: white;
+    text-align: start;
+    padding: 10px 100px;
+   
+}
+
+
+
+/* ปรับปุ่ม Login หรือ Logout */
+#login-btn button {
+    background-color: #0047AB;  /* สีพื้นหลัง */
+    color: white;  /* สีตัวอักษร */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+#login-btn button:hover {
+    background-color: #0047AB;  /* สีพื้นหลังเมื่อ Hover */
+}
+
+#login-btn button i {
+    font-size: 24px;  /* ขนาดของไอคอน */
+    margin-right: 10px; /* ระยะห่างระหว่างไอคอนและข้อความ */
+}
+
+#login-btn button span {
+    font-weight: bold;
+}
+
+/* สไตล์เมื่อผู้ใช้ล็อกอินแล้ว */
+#login-btn button.logged-in {
+    background-color: #1E88E5;  /* สีสำหรับปุ่มที่แสดงเมื่อล็อกอิน */
+}
+
+#login-btn button.logged-in:hover {
+    background-color: #1565C0;  /* สีพื้นหลังเมื่อ Hover ในสถานะล็อกอิน */
+}
+

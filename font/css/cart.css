@@ -1,0 +1,138 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #0047AB;
+    color: white;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 80px;
+    margin-right: 10px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+}
+
+.cart-container {
+    max-width: 900px;
+    background: white;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.cart-container h1 {
+    color: #0047AB;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* ส่วนรายการสินค้า */
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* ให้เว้นระยะระหว่างรูปภาพ ข้อความ และปุ่มลบ */
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+}
+
+.cart-item-img {
+    width: 80px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.cart-item-details {
+    flex-grow: 1; /* ให้ข้อความขยายตามพื้นที่ที่เหลือ */
+    margin-left: 15px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* ทำให้ข้อความอยู่ตรงกลาง */
+}
+
+.cart-item-details h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.cart-item-details p {
+    font-size: 14px;
+    color: #777;
+    margin: 3px 0;
+}
+
+/* ปุ่มลบสินค้า */
+.remove-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: red;
+    transition: 0.3s;
+}
+
+.remove-btn:hover {
+    color: darkred;
+    transform: scale(1.2);
+}
+
+/* Responsive Design สำหรับมือถือ */
+@media screen and (max-width: 768px) {
+    .cart-item {
+        flex-direction: column; /* ทำให้แต่ละสินค้าแสดงในแนวตั้ง */
+        align-items: center;
+        text-align: center;
+    }
+
+    .cart-item-img {
+        width: 100px; /* ปรับขนาดให้ใหญ่ขึ้น */
+        margin-bottom: 10px;
+    }
+
+    .cart-item-details {
+        text-align: center;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .remove-btn {
+        margin-top: 10px; /* ให้ปุ่มลบอยู่ใต้รายละเอียดสินค้า */
+    }
+}
+
+.cart-item-img {
+    width: 80px;
+    height: auto;
+    border-radius: 5px;
+    display: block; /* ✅ ทำให้แน่ใจว่ารูปภาพแสดงผล */
+}

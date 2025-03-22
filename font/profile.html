@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>โปรไฟล์ของฉัน</title>
+    <link rel="stylesheet" href="/font/css/profile.css">
+</head>
+<body>
+
+    <header>
+        <header>
+            <div class="logo">
+                <img src="/font/image/logo.png">
+                <h1>ร้านเตี๋ยวเรือ</h1>
+               
+            </div>
+    </header> 
+        <button onclick="logout()">Logout</button>
+    </header>
+    
+    <div class="profile-container">
+        <h1>โปรไฟล์ของฉัน</h1>
+        
+    </div>
+    
+
+    <section id="order-history">
+        <h2>ประวัติการสั่งซื้อ</h2>
+        <p>รหัสคำสั่งซื้อล่าสุด: <span id="latest-order"></span></p>
+        <p>สถานะการจัดส่ง: <span id="latest-status"></span></p>
+    </section>
+    
+    <!-- ปุ่มกลับไปหน้าหลัก -->
+    <button onclick="goToHome()" class="btn-home">กลับไปหน้าหลัก</button>
+
+    <script>
+        
+document.addEventListener("DOMContentLoaded", function() {
+    const orderId = localStorage.getItem("orderId") || "ยังไม่มีคำสั่งซื้อ";
+    const orderStatus = localStorage.getItem("orderStatus_" + orderId) || "ยังไม่มีข้อมูล"; // ✅ ใช้ key ให้ตรงกัน
+
+    document.getElementById("latest-order").textContent = orderId;
+    document.getElementById("latest-status").textContent = orderStatus;
+});
+
+
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            alert('คุณได้ทำการล็อกเอาท์');
+            window.location.href = '/font/home.html';  // กลับไปหน้าแรก
+        }
+        
+        function goToHome() {
+            window.location.href = "/font/home.html"; // ไปที่หน้าหลัก
+        }
+        </script>
+        
+        
+        
+
+</body>
+</html>

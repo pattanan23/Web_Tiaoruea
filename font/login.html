@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เข้าสู่ระบบ</title>
+    <link rel="stylesheet" href="/font/css/login.css">
+    <script src="/font/script/auth.js"></script>
+</head>
+<body>
+    <div class="back">
+        <a href="/font/home.html">หน้าแรก</a>
+    </div>
+
+    <div class="login-container">
+        <h2>เข้าสู่ระบบ</h2>
+        <form id="login-form" action="#" method="POST">
+            <input type="email" name="email" placeholder="อีเมล" required>
+            <input type="password" name="password" placeholder="รหัสผ่าน" required>
+            <button type="submit">เข้าสู่ระบบ</button>
+        </form>
+        
+        <a href="/font/register.html">สมัครบัญชีใหม่</a>
+    </div>
+
+    <script>
+      document.getElementById('login-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+
+    fetch('http://localhost:3300/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+        credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.user) {
+            localStorage.setItem('userId', data.user.customer_id);
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userName', data.user.name);
+
+            alert('✅ เข้าสู่ระบบสำเร็จ!');
+
+            // 🔹 ตรวจสอบบัญชีพนักงาน
+            const employeeAccounts = [
+                { email: "employee@gmail.com", password: "123456em" }
+            ];
+
+            const isEmployee = employeeAccounts.some(emp => emp.email === email && emp.password === password);
+
+            if (isEmployee) {
+                window.location.href = "/font/home_employ.html"; // 🔹 พนักงานไปหน้าจัดการ
+            } else {
+                const redirectPage = localStorage.getItem('redirectAfterLogin') || "/font/home.html";
+                localStorage.removeItem('redirectAfterLogin'); 
+                window.location.href = redirectPage;
+            }
+        } else {
+            alert("❌ อีเมลหรือรหัสผ่านไม่ถูกต้อง!");
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+        </script>
+        
+    
+</body>
+</html>

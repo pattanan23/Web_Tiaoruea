@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตะกร้าสินค้า</title>
+    <link rel="stylesheet" href="/font/css/cart.css">
+    <script src="/font/scirtp/auth.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="/font/image/logo.png" alt="ร้านเตี๋ยวเรือ">
+            <h1>ร้านเตี๋ยวเรือ</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/font/home.html">หน้าแรก</a></li>
+                <li><a href="/font/promotion.html">โปรโมชั่น</a></li>
+                <li><a href="/font/product.html">สินค้า</a></li>
+                <li><a href="/font/about.html">เกี่ยวกับเรา</a></li>
+                <li><a href="/font/cart.html">ตะกร้า</a></li>
+                <li id="login-btn">
+                    <button onclick="handleLoginLogout()">Login</button>
+                </li>
+                
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- ปุ่มกลับไปหน้าสินค้า -->
+<button id="back-to-products-btn" onclick="window.location.href='product.html'">
+    กลับไปเลือกสินค้า
+</button>
+
+
+    <div class="cart-container">
+        <h1>ตะกร้าสินค้า</h1>
+
+        
+
+        <div id="cart-content">
+            <!-- ถ้าไม่มีสินค้าจะแสดงข้อความนี้ -->
+            <p id="no-items-message" style="display: none; color: red;">ไม่มีสินค้าในตะกร้า</p>
+        </div>
+
+        <div id="total-price-container">
+            <p id="total-price">รวม: 0 บาท</p>
+            <p id="shipping-fee">ค่าส่ง: 35 บาท</p>
+            <button id="checkout-btn" class="checkout-btn" onclick="proceedToCheckout()">ไปที่หน้าชำระเงิน</button>
+        </div>
+    </div>
+
+    <script>
+        function proceedToCheckout() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn'); // ตรวจสอบสถานะล็อกอิน
+    if (isLoggedIn === 'true') {
+        // ✅ ถ้าล็อกอินแล้ว ไปที่หน้ากรอกที่อยู่
+        window.location.href = 'address.html';
+    } else {
+        // ❌ ถ้ายังไม่ล็อกอิน ให้ไปหน้า login ก่อน
+        alert("กรุณาเข้าสู่ระบบก่อนทำการชำระเงิน");
+        localStorage.setItem('redirectAfterLogin', window.location.href); // ✅ บันทึกหน้าที่จะกลับมา
+        window.location.href = 'login.html';
+    }
+}
+        
+document.addEventListener("DOMContentLoaded", function () {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartContent = document.getElementById("cart-content");
+    const totalPriceEl = document.getElementById("total-price");
+    const shippingFeeEl = document.getElementById("shipping-fee");
+    let total = 0;
+
+    if (cart.length === 0) {
+        cartContent.innerHTML = "<p id='no-items-message'>ไม่มีสินค้าในตะกร้า</p>";
+    } else {
+        cartContent.innerHTML = ""; // เคลียร์ตะกร้าก่อนโหลดใหม่
+
+        cart.forEach((item, index) => {
+            total += item.price * item.quantity; // คำนวณราคารวม
+
+            // ✅ ตรวจสอบว่ามีค่ารูปภาพหรือไม่ ถ้าไม่มีให้ใช้รูป Default
+            const productImage = item.image ? item.image : '/font/image/default.png';
+
+            cartContent.innerHTML += `
+                <div class="cart-item">
+                    <img src="${productImage}" alt="${item.name}" class="cart-item-img">
+                    <div class="cart-item-details">
+                        <h3>${item.name} (${item.noodleType})</h3>
+                        <p>ราคา: ${item.price} บาท x ${item.quantity}</p>
+                        <p>รวม: ${item.price * item.quantity} บาท</p>
+                        <button class="remove-btn" onclick="removeFromCart(${index})">🗑️</button>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    // ✅ ตรวจสอบว่าต้องเสียค่าส่งหรือไม่
+    let shippingFee = total >= 300 ? 0 : 35;
+
+    totalPriceEl.textContent = `รวม: ${total} บาท`;
+    shippingFeeEl.textContent = `ค่าส่ง: ${shippingFee} บาท`;
+
+    // ✅ อัปเดตยอดรวมสุดท้าย (รวมค่าส่ง)
+    document.getElementById("checkout-btn").setAttribute("data-total", total + shippingFee);
+});
+
+// ✅ ฟังก์ชันลบสินค้าออกจากตะกร้า
+function removeFromCart(index) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.splice(index, 1); // ลบสินค้าตาม index
+    localStorage.setItem('cart', JSON.stringify(cart));
+    location.reload(); // รีเฟรชหน้าเพื่ออัปเดตข้อมูล
+}
+
+        </script>
+        
+</body>
+</html>

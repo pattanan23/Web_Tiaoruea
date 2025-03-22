@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>โอนผ่านธนาคาร</title>
+    <link rel="stylesheet" href="/font/css/qr-payment.css">
+</head>
+<body>
+
+    <div class="qr-payment-container">
+        <h1>สแกน QR Code เพื่อโอนเงิน</h1>
+        <img src="/font/image/QR.jpg" alt="QR Code">
+        <p>โปรดโอนเงินตามจำนวนที่ระบุ และกด "ยืนยันการชำระเงิน"</p>
+
+        <button onclick="confirmPayment()">ยืนยันการชำระเงิน</button>
+    </div>
+
+    <script>
+        function confirmPayment() {
+            alert("ชำระเงินเรียบร้อยแล้ว!");
+
+            // บันทึกวิธีการชำระเงิน
+            localStorage.setItem('paymentMethod', 'โอนผ่านธนาคาร');
+
+            // ไปที่หน้า payment-success.html
+            window.location.href = "payment-success.html";
+        }
+    </script>
+
+</body>
+</html>

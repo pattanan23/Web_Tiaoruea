@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ชำระเงิน</title>
+    <link rel="stylesheet" href="/font/css/payment.css">
+</head>
+<body>
+
+    <div class="payment-container">
+        <h1>ข้อมูลการซื้อ</h1>
+        <div id="order-details">
+            <!-- รายละเอียดการสั่งซื้อจะไปแสดงที่นี่ -->
+        </div>
+
+        <button id="next-btn" onclick="goToAddress()">กรอกข้อมูลที่อยู่</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const orderDetails = document.getElementById('order-details');
+            let total = 0;
+            let orderSummary = '';
+
+            if (cart.length === 0) {
+                orderDetails.innerHTML = '<p>ไม่มีสินค้าในตะกร้า</p>';
+            } else {
+                cart.forEach(item => {
+                    let itemTotalPrice = item.price * item.quantity;
+                    total += itemTotalPrice;
+
+                    orderSummary += `
+                        <div class="order-item">
+                            <h3>${item.name} - ${item.noodleType}</h3>
+                            <p>ราคา: ${item.price} บาท x ${item.quantity}</p>
+                            <p>รวม: ${itemTotalPrice} บาท</p>
+                        </div>
+                    `;
+                });
+
+                // คำนวณค่าส่ง
+                let shippingFee = total >= 300 ? 0 : 35;
+                total += shippingFee;
+
+                orderSummary += `
+                    <div class="order-total">
+                        <h3>รวมทั้งหมด: ${total} บาท</h3>
+                        <p>ค่าส่ง: ${shippingFee} บาท</p>
+                    </div>
+                `;
+
+                orderDetails.innerHTML = orderSummary;
+            }
+        });
+
+        // ฟังก์ชันไปยังหน้า address.html
+        function goToAddress() {
+            // ไปที่หน้า address.html
+            window.location.href = 'address.html';
+        }
+    </script>
+
+</body>
+</html>

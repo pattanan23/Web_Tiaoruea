@@ -1,0 +1,152 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: #0047AB;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo img{
+    width: 100px;
+    margin-right: 10px;
+}
+
+nav ul{
+    display: flex;
+    list-style: none;/*ลบเครื่องหมายขีด*/
+    gap: 15px; /*ช่องว่างระหว่าง li*/
+}
+
+nav ul li a{
+    text-decoration: none;/*ลบขีดใต้*/
+    font-size: 16px;
+    color: #0047AB
+}
+
+.login-btn{
+    background-color: #0047AB;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.about-header {
+    background-color: #0047AB;
+    text-align: center;
+    padding: 20px 0;
+    color: white;
+    font-size: 24px;
+}
+
+/* กล่องรูปภาพ */
+.about-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    max-width: 800px;
+}
+
+.gallery img {
+    width: 350px;
+    height: 350px;
+    border-radius: 10px;
+    border: 3px solid #0047AB;
+}
+
+.social img{
+    width: 50px;
+    height: 50px;
+    gap: 10px;
+    margin-top: 20px;
+}
+footer{
+    display: flex;
+    justify-content: space-between;
+    background-color:#0047AB;
+    color: white;
+    text-align: start;
+    padding: 10px 100px;
+   
+}
+
+/* ปรับปุ่ม Login หรือ Logout */
+#login-btn button {
+    background-color: #0047AB;  /* สีพื้นหลัง */
+    color: white;  /* สีตัวอักษร */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+#login-btn button:hover {
+    background-color: #0047AB;  /* สีพื้นหลังเมื่อ Hover */
+}
+
+#login-btn button i {
+    font-size: 24px;  /* ขนาดของไอคอน */
+    margin-right: 10px; /* ระยะห่างระหว่างไอคอนและข้อความ */
+}
+
+#login-btn button span {
+    font-weight: bold;
+}
+
+/* สไตล์เมื่อผู้ใช้ล็อกอินแล้ว */
+#login-btn button.logged-in {
+    background-color: #1E88E5;  /* สีสำหรับปุ่มที่แสดงเมื่อล็อกอิน */
+}
+
+#login-btn button.logged-in:hover {
+    background-color: #1565C0;  /* สีพื้นหลังเมื่อ Hover ในสถานะล็อกอิน */
+}
+
+
+/* เพิ่มข้อความรายละเอียด */
+.about-description {
+    background-color:#0047AB;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgb(10, 3, 55);
+    margin: 0 20px 30px 20px;
+    text-align: center;
+}
+
+/* การจำกัดความยาวของข้อความ */
+.about-description p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #ffffff;
+    margin-bottom: 20px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    
+}
+
+
+
+

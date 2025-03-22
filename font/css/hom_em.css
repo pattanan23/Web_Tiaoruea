@@ -1,0 +1,152 @@
+/* CSS สำหรับ sale.html และ home_employ.html */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #0047AB;
+    color: white;
+    text-align: center;
+}
+
+nav {
+    text-align: center;
+    margin-top: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    margin: 0 15px;
+    font-size: 18px;
+    padding: 10px 15px;
+    background-color: #003580;
+    border-radius: 5px;
+}
+
+nav a:hover {
+    background-color: #002855;
+    text-decoration: none;
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+}
+
+.task-form h2{
+    color: #0047AB;
+}
+
+/* ตาราง sale.html */
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #0047AB;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #e3e3e3;
+}
+
+/* ปุ่มและ input */
+button {
+    background-color: #0047AB;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #003580;
+}
+
+input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* ส่วนของ home_employ.html */
+.task-form, .task-list {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* เพิ่มช่องว่างด้านล่างระหว่างส่วนต่างๆ */
+.task-form {
+    margin-bottom: 30px;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    font-size: 18px;
+}
+
+.task-item input {
+    transform: scale(1.3);
+    margin-right: 10px;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+/* สไตล์ยอดรวมทั้งหมด */
+.total-sales {
+    color: #0047AB;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: #e0eaff;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.task-list h2 {
+    color: #0047AB;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บันทึกงานพนักงาน</title>
+  
+    <link rel="stylesheet" href="/font/css/hom_em.css">
+    <script defer>
+        document.addEventListener("DOMContentLoaded", function() {
+            displayTasks();
+        });
+        
+        function addTask() {
+            let taskInput = document.getElementById('task-input').value;
+            if (taskInput) {
+                let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+                tasks.push({ task: taskInput, completed: false });
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                document.getElementById('task-input').value = "";
+                displayTasks();
+            } else {
+                alert("กรุณากรอกชื่องาน");
+            }
+        }
+        
+        function displayTasks() {
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            let container = document.getElementById('task-list');
+            container.innerHTML = "";
+            
+            if (tasks.length === 0) {
+                container.innerHTML = "<p>ไม่มีงานที่ต้องทำ</p>";
+                return;
+            }
+            
+            tasks.forEach((task, index) => {
+                let div = document.createElement('div');
+                div.classList.add('task-item');
+                div.innerHTML = `
+                    <input type="checkbox" onchange="completeTask(${index})" ${task.completed ? "checked" : ""}>
+                    <span class="${task.completed ? 'completed' : ''}">${task.task}</span>
+                    <button onclick="deleteTask(${index})">ลบ</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+        
+        function completeTask(index) {
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks[index].completed = !tasks[index].completed;
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            displayTasks();
+        }
+        
+        function deleteTask(index) {
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.splice(index, 1);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            displayTasks();
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>บันทึกงานพนักงาน</h1>
+        <nav>
+            <a href="sale.html">ยอดขายพนักงาน</a>
+            <a href="home_employ.html">บันทึกงานพนักงาน</a>
+        </nav>
+    </header>
+    
+    <section class="task-form">
+        <h2>เพิ่มงานใหม่</h2>    
+        <input type="text" id="task-input" placeholder="ชื่องาน">
+        <button onclick="addTask()">เพิ่มงาน</button>
+    </section>
+    
+    <section class="task-list">
+        <h2>รายการงาน</h2>
+        <div id="task-list"></div>
+    </section>
+</body>
+</html>

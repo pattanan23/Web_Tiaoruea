@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>กรอกข้อมูลที่อยู่</title>
+    <link rel="stylesheet" href="/font/css/address.css">
+</head>
+<body>
+
+    <div class="address-container">
+        <h1>กรอกข้อมูลที่อยู่</h1>
+        <form id="address-form">
+            <label for="address">ที่อยู่:</label>
+            <textarea id="address" name="address" placeholder="กรุณากรอกที่อยู่ของคุณ" required></textarea>
+
+            <label for="phone">เบอร์โทรศัพท์:</label>
+            <input type="tel" id="phone" name="phone" placeholder="กรุณากรอกเบอร์โทรศัพท์" required>
+
+            <button type="submit">บันทึกที่อยู่</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('address-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const address = document.getElementById('address').value;
+            const phone = document.getElementById('phone').value;
+
+            // บันทึกข้อมูลที่อยู่ลงใน localStorage
+            localStorage.setItem('address', address);
+            localStorage.setItem('phone', phone);
+
+            alert('ข้อมูลที่อยู่ถูกบันทึกเรียบร้อยแล้ว');
+            window.location.href = 'payment-method.html'; // ไปที่หน้าเลือกวิธีการชำระเงิน
+        });
+    </script>
+
+</body>
+</html>

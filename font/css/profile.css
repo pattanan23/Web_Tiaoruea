@@ -1,0 +1,104 @@
+/* พื้นฐานของ body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    text-align: center;
+}
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: #0047AB;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo img{
+    width: 100px;
+    margin-right: 10px;
+}
+
+header button {
+    background-color: #FF4B2B;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    float: right;
+    margin-top: -40px;
+    margin-right: 20px;
+}
+
+header button:hover {
+    background-color: #D43F00;
+}
+
+.profile-container{
+    max-width: 600px;
+    margin: 50px auto;
+    color: #0047AB;
+   
+    text-align: center;
+}
+
+/* ส่วนแสดงประวัติการสั่งซื้อ */
+#order-history {
+    background-color: white;
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+#order-history h2 {
+    color: #0047AB;
+    font-size: 24px;
+}
+
+#latest-order {
+    font-size: 22px;
+    font-weight: bold;
+    color: #28a745;
+}
+
+/* ปุ่ม "กลับไปหน้าหลัก" */
+.btn-home {
+    background-color: #007BFF;
+    color: white;
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-home:hover {
+    background-color: #0056b3;
+}
+
+/* เอฟเฟกต์แสดงผล */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

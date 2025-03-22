@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายละเอียดสินค้า</title>
+    <link rel="stylesheet" href="/font/css/product2.css">
+    <script src="/font/script/product.js"></script>
+</head>
+<body>
+
+    <div class="product-details">
+        <img id="cart-item-image" alt="สินค้าที่เลือก" class="cart-item-img">
+        <div class="product-info">
+            <h2 id="cart-item-name">ชื่อสินค้า</h2>
+            <p>ราคา: <span id="cart-item-price">100 บาท</span></p>
+
+            <div class="product-options">
+                <label for="noodle-type">เลือกเส้น:</label>
+                <select id="noodle-type" onchange="updateNoodle()">
+                    <option value="เล็ก">เล็ก</option>
+                    <option value="ใหญ่">ใหญ่</option>
+                    <option value="ข้าวซอย">ข้าวซอย</option>
+                </select>
+            </div>
+
+            <div class="quantity-control">
+                <button onclick="changeQuantity(-1)">-</button>
+                <span id="cart-item-quantity">1</span>
+                <button onclick="changeQuantity(1)">+</button>
+            </div>
+
+            <p>รวม: <span id="total-price">100</span> บาท</p>
+
+            <button id="add-to-cart" onclick="addToCart()">เพิ่มลงตะกร้า</button>
+
+
+        </div>
+    </div>
+
+    <script>
+        // ดึงข้อมูลจาก localStorage
+        const imageSrc = localStorage.getItem('cartImage');
+        const productName = localStorage.getItem('cartProductName');
+        const productPrice = parseFloat(localStorage.getItem('cartProductPrice')) || 100;
+        let quantity = parseInt(localStorage.getItem('cartQuantity')) || 1;
+        let noodleType = localStorage.getItem('cartNoodle') || "เล็ก";
+
+        // แสดงข้อมูลในหน้าตะกร้า
+        document.getElementById('cart-item-image').src = imageSrc;
+        document.getElementById('cart-item-name').textContent = productName;
+        document.getElementById('cart-item-price').textContent = productPrice;
+        document.getElementById('cart-item-quantity').textContent = quantity;
+        document.getElementById('noodle-type').value = noodleType;
+        updateTotalPrice();
+
+        // ฟังก์ชันเพิ่ม/ลดจำนวนสินค้า
+        function changeQuantity(amount) {
+            quantity += amount;
+            if (quantity < 1) quantity = 1; // ป้องกันไม่ให้จำนวนสินค้าน้อยกว่า 1
+
+            document.getElementById('cart-item-quantity').textContent = quantity;
+            updateTotalPrice();
+
+            // บันทึกจำนวนใหม่ลงใน localStorage
+            localStorage.setItem('cartQuantity', quantity);
+        }
+
+        // ฟังก์ชันคำนวณราคา
+        function updateTotalPrice() {
+            const totalPrice = productPrice * quantity;
+            document.getElementById('total-price').textContent = totalPrice;
+        }
+
+        // ฟังก์ชันอัปเดตการเลือกเส้น
+        function updateNoodle() {
+            noodleType = document.getElementById('noodle-type').value;
+            localStorage.setItem('cartNoodle', noodleType);
+        }
+       
+        function addToCart() {
+    const image = localStorage.getItem('cartImage');
+    const name = localStorage.getItem('cartProductName');
+    const price = parseFloat(localStorage.getItem('cartProductPrice')) || 100;
+    const quantity = parseInt(document.getElementById('cart-item-quantity').textContent);
+    const noodleType = document.getElementById('noodle-type').value;
+    const menuId = localStorage.getItem('cartMenuId');
+
+    if (!menuId || !image || !name) { 
+        alert("เกิดข้อผิดพลาด: ไม่มีข้อมูลสินค้า หรือรูปภาพ");
+        return;
+    }
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // ✅ ตรวจสอบว่าสินค้านี้มีอยู่แล้วหรือไม่ โดยใช้ menuId + noodleType + image + name
+    const existingItemIndex = cart.findIndex(item => 
+        item.menuId === menuId && 
+        item.noodleType === noodleType &&
+        item.image === image &&
+        item.name === name
+    );
+
+    if (existingItemIndex !== -1) {
+        // ✅ ถ้าสินค้านี้มีอยู่แล้ว ให้เพิ่มจำนวนสินค้า
+        cart[existingItemIndex].quantity += quantity;
+    } else {
+        // ✅ ถ้าเป็นสินค้าใหม่ ให้เพิ่มเข้าไปในตะกร้า
+        cart.push({ menuId, image, name, price, quantity, noodleType });
+    }
+
+    // ✅ บันทึกกลับไปที่ Local Storage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    alert("✅ เพิ่มลงตะกร้าสำเร็จ!");
+    window.location.href = 'cart.html'; // ไปยังหน้าตะกร้าสินค้า
+}
+
+    </script>
+
+</body>
+</html>

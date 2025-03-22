@@ -1,0 +1,192 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: #0047AB;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo img{
+    width: 100px;
+    margin-right: 10px;
+}
+
+nav ul{
+    display: flex;
+    list-style: none;/*ลบเครื่องหมายขีด*/
+    gap: 15px; /*ช่องว่างระหว่าง li*/
+}
+
+nav ul li a{
+    text-decoration: none;/*ลบขีดใต้*/
+    font-size: 16px;
+    color: #0047AB
+}
+
+.login-btn{
+    background-color: #0047AB;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* หัวข้อสินค้า */
+.product-header {
+    background-color: #0047AB;
+    background-size: cover;
+    text-align: center;
+    padding: 5px 0;
+    color: white;
+    font-size: 30px;
+}
+
+
+/* กล่องสินค้า */
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.product {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid #0047AB;
+}
+
+.product img {
+    width: 100px;
+    height: auto;
+}
+
+.product h3 {
+    color: #0047AB;
+    margin: 10px 0;
+}
+
+.product p {
+    color: #2e1dec;
+    font-weight: bold;
+}
+
+
+.cart-btn {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cart-btn:hover {
+    background-color: darkorange;
+}
+
+
+.sold-out {
+    position: relative;
+    opacity: 0.6;
+}
+
+.sold-out-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}
+
+.social img{
+    width: 50px;
+    height: 50px;
+    gap: 10px;
+    margin-top: 20px;
+}
+footer{
+    display: flex;
+    justify-content: space-between;
+    background-color:#0047AB;
+    color: white;
+    text-align: start;
+    padding: 10px 100px;
+   
+}
+
+/* ปรับปุ่ม Login หรือ Logout */
+#login-btn button {
+    background-color: #0047AB;  /* สีพื้นหลัง */
+    color: white;  /* สีตัวอักษร */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+#login-btn button:hover {
+    background-color: #0047AB;  /* สีพื้นหลังเมื่อ Hover */
+}
+
+#login-btn button i {
+    font-size: 24px;  /* ขนาดของไอคอน */
+    margin-right: 10px; /* ระยะห่างระหว่างไอคอนและข้อความ */
+}
+
+#login-btn button span {
+    font-weight: bold;
+}
+
+/* สไตล์เมื่อผู้ใช้ล็อกอินแล้ว */
+#login-btn button.logged-in {
+    background-color: #1E88E5;  /* สีสำหรับปุ่มที่แสดงเมื่อล็อกอิน */
+}
+
+#login-btn button.logged-in:hover {
+    background-color: #1565C0;  /* สีพื้นหลังเมื่อ Hover ในสถานะล็อกอิน */
+}
+
+input[type="text"] {
+    padding: 10px;
+    margin: 5px 0;
+    width: 50%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.search-container {
+    text-align: center;
+    margin-top: 20px;
+}

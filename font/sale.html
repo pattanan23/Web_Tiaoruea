@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ยอดขายพนักงาน</title>
+    <link rel="stylesheet" href="/font/css/hom_em.css">
+
+</head>
+<body>
+    <header>
+        <h1>ยอดขายพนักงานวันนี้</h1>
+        <p>วันที่: <span id="current-date"></span></p>
+        <nav>
+            <a href="sale.html">ยอดขายพนักงาน</a>
+            <a href="home_employ.html">บันทึกงานพนักงาน</a>
+        </nav>
+        
+    </header>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>สินค้า</th>
+                <th>จำนวนออเดอร์</th>
+                <th>ยอดรวม (บาท)</th>
+                <th>สถานะการจัดส่ง</th>
+            </tr>
+        </thead>
+        <tbody id="sales-data"></tbody>
+    </table>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let sales = JSON.parse(localStorage.getItem('salesData')) || [];
+            let today = new Date().toISOString().split('T')[0];
+            document.getElementById("current-date").textContent = today;
+        
+            let totalSales = 0;
+            let salesTable = document.getElementById("sales-data");
+            salesTable.innerHTML = "";
+        
+            sales.forEach((order, index) => {
+                let orderId = order.orderId || `ORDER-${index + 1}`;
+                let orderStatus = localStorage.getItem(`orderStatus_${orderId}`) || "กำลังเตรียมสินค้า";
+        
+                let isDisabledPreparing = orderStatus === "กำลังจัดส่ง" || orderStatus === "จัดส่งสำเร็จ";
+                let isDisabledShipping = orderStatus === "จัดส่งสำเร็จ";
+        
+                let row = `
+                    <tr>
+                        <td colspan="4"><strong>รหัสออเดอร์: ${orderId}</strong></td>
+                    </tr>
+                `;
+        
+                order.items.forEach(item => {
+                    let totalPrice = item.price * item.quantity;
+                    totalSales += totalPrice;
+        
+                    row += `
+                        <tr>
+                            <td>${item.name} (${item.noodleType})</td>
+                            <td>${item.quantity}</td>
+                            <td>${totalPrice.toLocaleString()} บาท</td>
+                            <td>
+                                <select id="status-${orderId}" onchange="updateStatus('${orderId}', this.value)">
+                                    <option value="กำลังเตรียมสินค้า" ${orderStatus === "กำลังเตรียมสินค้า" ? "selected" : ""} ${isDisabledPreparing ? "disabled" : ""}>กำลังเตรียมสินค้า</option>
+                                    <option value="กำลังจัดส่ง" ${orderStatus === "กำลังจัดส่ง" ? "selected" : ""} ${isDisabledShipping ? "disabled" : ""}>กำลังจัดส่ง</option>
+                                    <option value="จัดส่งสำเร็จ" ${orderStatus === "จัดส่งสำเร็จ" ? "selected" : ""}>จัดส่งสำเร็จ</option>
+                                </select>
+                            </td>
+                        </tr>
+                    `;
+                });
+        
+                salesTable.innerHTML += row;
+            });
+        
+            let totalRow = document.createElement("tr");
+            totalRow.innerHTML = `<td colspan="2"><strong>ยอดรวมทั้งหมด</strong></td><td colspan="2"><strong>${totalSales.toLocaleString()} บาท</strong></td>`;
+            salesTable.appendChild(totalRow);
+        });
+        
+        function updateStatus(orderId, newStatus) {
+            localStorage.setItem(`orderStatus_${orderId}`, newStatus);
+            localStorage.setItem("orderId", orderId); // ✅ อัปเดต orderId ให้ profile.html ใช้
+            localStorage.setItem("orderStatus", newStatus); // ✅ อัปเดตให้ profile.html เห็น
+        
+            let selectElement = document.getElementById(`status-${orderId}`);
+            if (newStatus === "กำลังจัดส่ง") {
+                selectElement.options[0].disabled = true;
+            } else if (newStatus === "จัดส่งสำเร็จ") {
+                selectElement.options[0].disabled = true;
+                selectElement.options[1].disabled = true;
+            }
+        
+            window.location.reload(); // ✅ รีเฟรชเพื่อให้ค่าใหม่อัปเดตทันที
+        }
+        </script>
+        
+</body>
+</html>

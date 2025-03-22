@@ -1,0 +1,60 @@
+/* พื้นฐานของ body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8; /* พื้นหลังเรียบง่าย */
+    color: #333;
+}
+
+/* การตั้งค่า container ของหน้า */
+.order-confirmation-container {
+    background-color: #ffffff;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* หัวข้อ */
+.order-confirmation-container h1 {
+    font-size: 26px;
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+/* ข้อความแสดงรหัสคำสั่งซื้อ */
+.order-confirmation-container p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+/* รหัสคำสั่งซื้อ */
+#order-id {
+    font-weight: bold;
+    font-size: 22px;
+    color: #0047ab;
+}
+
+/* ปุ่ม "กลับไปที่โปรไฟล์" */
+button {
+    background-color: #007BFF; /* สีน้ำเงิน */
+    color: white;
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease; /* เพิ่มเอฟเฟกต์ hover */
+}
+
+button:hover {
+    background-color: #0056b3; /* สีเปลี่ยนเมื่อ hover */
+}
+
+button:focus {
+    outline: none;
+}

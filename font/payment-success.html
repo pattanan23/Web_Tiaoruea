@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ชำระเงินสำเร็จ</title>
+    <link rel="stylesheet" href="/font/css/payment-success.css">
+</head>
+<body>
+
+    <div class="payment-success-container">
+        <h1>ชำระเงินสำเร็จ!</h1>
+        <p>ขอบคุณที่ใช้บริการของเรา</p>
+        <p>ข้อมูลการชำระเงินของคุณ:</p>
+        <ul>
+            <li>วิธีการชำระเงิน: <span id="payment-method-details"></span></li>
+            <li>ที่อยู่จัดส่ง: <span id="address-details"></span></li>
+            <li>เบอร์โทรศัพท์: <span id="phone-details"></span></li>
+        </ul>
+
+        <!-- ปุ่มไปยังหน้ารหัสคำสั่งซื้อ -->
+        <button onclick="goToOrderConfirmation()">ดูรหัสคำสั่งซื้อ</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let today = new Date().toISOString().split('T')[0];
+    let address = localStorage.getItem('address') || "ไม่มีข้อมูล";
+    let phone = localStorage.getItem('phone') || "ไม่มีข้อมูล";
+
+    // ดึงวิธีการชำระเงินจาก localStorage
+    let paymentMethod = localStorage.getItem('paymentMethod') || "ไม่มีข้อมูล";
+
+    // แสดงข้อมูลบนหน้า payment-success.html
+    document.getElementById('address-details').innerText = address;
+    document.getElementById('phone-details').innerText = phone;
+    document.getElementById('payment-method-details').innerText = paymentMethod;
+
+    if (cart.length > 0) {
+        let salesData = JSON.parse(localStorage.getItem('salesData')) || [];
+
+        // ✅ กรองเฉพาะข้อมูลที่มีโครงสร้างถูกต้อง
+        salesData = salesData.filter(order => order.date && order.items);
+
+        let newSale = {
+            date: today,
+            items: cart.map(item => ({
+                name: item.name,
+                noodleType: item.noodleType,
+                quantity: item.quantity,
+                price: item.price
+            }))
+        };
+
+        salesData.push(newSale);
+        localStorage.setItem('salesData', JSON.stringify(salesData));
+
+        console.log("👉 บันทึก salesData ใหม่:", salesData);
+    }
+
+    localStorage.removeItem('cart');  // ล้างตะกร้าหลังจากชำระเงิน
+});
+
+        function goToOrderConfirmation() {
+            window.location.href = "order-confirmation.html";  // ไปที่หน้ารหัสคำสั่งซื้อ
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เลือกวิธีการชำระเงิน</title>
+    <link rel="stylesheet" href="/font/css/payment-method.css">
+</head>
+<body>
+
+    <div class="payment-method-container">
+        <h1>เลือกวิธีการชำระเงิน</h1>
+        <form id="payment-form">
+            <label for="payment-method">เลือกวิธีการชำระเงิน:</label>
+            <select id="payment-method" name="payment-method" required>
+                <option value="cash">เงินสด</option>
+                <option value="credit-card">บัตรเครดิต</option>
+                <option value="bank-transfer">โอนผ่านธนาคาร</option>
+            </select>
+
+            <button type="submit">ยืนยันการชำระเงิน</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('payment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const paymentMethod = document.getElementById('payment-method').value;
+            localStorage.setItem('paymentMethod', paymentMethod);
+
+            if (paymentMethod === "cash") {
+                window.location.href = "payment-success.html";
+            } else if (paymentMethod === "bank-transfer") {
+                window.location.href = "qr-payment.html";
+            } else if (paymentMethod === "credit-card") {
+                window.location.href = "credit-card.html";
+            }
+        });
+    </script>
+
+</body>
+</html>

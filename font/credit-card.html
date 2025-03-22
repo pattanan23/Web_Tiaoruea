@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ชำระเงินด้วยบัตรเครดิต</title>
+    <link rel="stylesheet" href="/font/css/credit-card.css">
+</head>
+<body>
+
+    <div class="credit-card-container">
+        <h1>กรอกข้อมูลบัตรเครดิต</h1>
+        <form id="credit-card-form">
+            <label for="card-number">หมายเลขบัตร:</label>
+            <input type="text" id="card-number" placeholder="xxxx-xxxx-xxxx-xxxx" required>
+
+            <label for="expiry">วันหมดอายุ:</label>
+            <input type="text" id="expiry" placeholder="MM/YY" required>
+
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" placeholder="xxx" required>
+
+            <button type="submit">ยืนยันการชำระเงิน</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('credit-card-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert("บัตรได้รับการยืนยันเรียบร้อยแล้ว!");
+
+            // บันทึกวิธีการชำระเงิน
+            localStorage.setItem('paymentMethod', 'บัตรเครดิต');
+
+            // ไปที่หน้า payment-success.html
+            window.location.href = "payment-success.html";
+        });
+    </script>
+
+</body>
+</html>

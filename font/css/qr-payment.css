@@ -1,0 +1,42 @@
+body {
+    background-color: #f0f4f8;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.qr-payment-container {
+    background-color: #ffffff;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    color: #0047AB;
+    margin-bottom: 20px;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #218838;
+}

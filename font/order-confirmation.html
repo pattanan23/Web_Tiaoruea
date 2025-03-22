@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำสั่งซื้อของคุณ</title>
+    <link rel="stylesheet" href="/font/css/order-confirmation.css">
+</head>
+<body>
+
+    <div class="order-confirmation-container">
+        <h1>คำสั่งซื้อของคุณเสร็จสมบูรณ์</h1>
+        <p>รหัสคำสั่งซื้อของคุณคือ: <span id="order-id"></span></p>
+
+        <h2>สถานะการจัดส่ง</h2>
+        <p id="order-status">กำลังเตรียมสินค้า</p>
+    
+
+        <!-- ปุ่มกลับไปหน้าโปรไฟล์ -->
+        <button onclick="goToProfile()">กลับไปที่โปรไฟล์</button>
+    </div>
+
+    <script>
+
+function goToProfile() {
+    window.location.href = "profile.html";  // ✅ นำทางไปยังหน้าโปรไฟล์
+}
+        document.addEventListener("DOMContentLoaded", function() {
+            let salesData = JSON.parse(localStorage.getItem('salesData')) || [];
+            let userId = localStorage.getItem("userId") || "guest"; // ✅ ผูกคำสั่งซื้อกับลูกค้า
+            let today = new Date().toISOString().split('T')[0];
+        
+            // ✅ ตรวจสอบ `orderId` และบันทึกออเดอร์ใหม่
+            const orderId = `ORDER-${salesData.length + 1}`;
+            localStorage.setItem("orderId", orderId);
+            document.getElementById("order-id").textContent = orderId;
+        
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length > 0) {
+                let newSale = {
+                    orderId: orderId,
+                    userId: userId,
+                    date: today,
+                    status: "กำลังเตรียมสินค้า",
+                    items: cart.map(item => ({
+                        name: item.name,
+                        noodleType: item.noodleType,
+                        quantity: item.quantity,
+                        price: item.price
+                    }))
+                };
+        
+                salesData.push(newSale);
+                localStorage.setItem('salesData', JSON.stringify(salesData));
+            }
+        
+            // ✅ รีเซ็ตตะกร้าสินค้า
+            localStorage.removeItem("cart");
+            document.getElementById("order-status").textContent = "กำลังเตรียมสินค้า";
+        });
+        </script>
+        
+        
+
+
+
+</body>
+</html>
